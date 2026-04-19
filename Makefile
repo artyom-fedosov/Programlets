@@ -4,7 +4,7 @@ LDLIBS = -lcrypt
 
 .PHONY: all clean
 
-all: check_password intexec
+all: check_password intexec watch_files
 
 check_password: check_password.o
 	$(CC) check_password.o $(LDLIBS) -o check_password
@@ -18,5 +18,11 @@ intexec: command_interval_execution.o
 command_interval_execution.o: command_interval_execution.c
 	$(CC) $(CFLAGS) -c command_interval_execution.c -o command_interval_execution.o
 
+watch_files: watch_files.o
+	$(CC) watch_files.o $(LDLIBS) -o watch_files
+
+watch_files.o: watch_files.c
+	$(CC) $(CFLAGS) -c watch_files.c -o watch_files.o
+
 clean:
-	rm -f check_password check_password.o intexec command_interval_execution.o
+	rm -f check_password check_password.o intexec command_interval_execution.o watch_files watch_files.o
